@@ -45,8 +45,8 @@ type AppProvider struct {
 	Driver        string
 	IopSecret     string
 	WopiInsecure  bool
-	WopiUrl       string
-	WopiBridgeUrl string
+	WopiURL       string
+	WopiBridgeURL string
 }
 
 // Sharing defines the available sharing configuration.
@@ -157,7 +157,7 @@ type StoragePort struct {
 	// for HTTP ports with only one http service
 	HTTPPrefix string
 	TempFolder string
-	ReadOnly bool
+	ReadOnly   bool
 }
 
 // PublicStorage configures a public storage provider
