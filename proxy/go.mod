@@ -13,6 +13,8 @@ require (
 	github.com/cs3org/reva v1.10.1-0.20210730095301-fcb7a30a44a6
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-chi/chi v4.1.2+incompatible
+	github.com/imdario/mergo v0.3.11
+	github.com/jinzhu/copier v0.0.0-20190924061706-b57f9002281a
 	github.com/justinas/alice v1.2.0
 	github.com/micro/cli/v2 v2.1.2
 	github.com/oklog/run v1.1.0
