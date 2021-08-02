@@ -67,13 +67,13 @@ func Server(cfg *config.Config) *cli.Command {
 			// When an extension is running supervised, we have the use case where executing `ocis run extension`
 			// we want to ONLY take into consideration fhe existing config file. This is a hard requirement.
 			if !reflect.DeepEqual(fromAccountsConfigFile, config.Config{}) {
-				if err := mergo.Merge(cfg, fromAccountsConfigFile); err != nil {
+				if err := mergo.Merge(cfg, fromAccountsConfigFile, mergo.WithOverride); err != nil {
 					panic(err)
 				}
 				return nil
 			}
 
-			if err := mergo.Merge(cfg, fromAccountsConfigFile); err != nil {
+			if err := mergo.Merge(cfg, fromAccountsConfigFile, mergo.WithOverride); err != nil {
 				panic(err)
 			}
 
