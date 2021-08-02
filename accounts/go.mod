@@ -34,7 +34,6 @@ require (
 	golang.org/x/net v0.0.0-20210614182718-04defd469f4e
 	google.golang.org/genproto v0.0.0-20210207032614-bba0dbe2a9ea
 	google.golang.org/grpc v1.39.0
-	google.golang.org/grpc/examples v0.0.0-20210730002332-ea9b7a0a7651 // indirect
 	google.golang.org/protobuf v1.27.1
 )
 
