@@ -15,6 +15,8 @@ require (
 	github.com/gofrs/uuid v3.3.0+incompatible
 	github.com/golang/protobuf v1.5.2
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.2.0
+	github.com/imdario/mergo v0.3.11
+	github.com/jinzhu/copier v0.0.0-20190924061706-b57f9002281a
 	github.com/mennanov/fieldmask-utils v0.3.3
 	github.com/micro/cli/v2 v2.1.2
 	github.com/oklog/run v1.1.0
@@ -32,6 +34,7 @@ require (
 	golang.org/x/net v0.0.0-20210614182718-04defd469f4e
 	google.golang.org/genproto v0.0.0-20210207032614-bba0dbe2a9ea
 	google.golang.org/grpc v1.39.0
+	google.golang.org/grpc/examples v0.0.0-20210730002332-ea9b7a0a7651 // indirect
 	google.golang.org/protobuf v1.27.1
 )
 
