@@ -68,8 +68,6 @@ _etag propagation_
 -   [apiWebdavEtagPropagation1/deleteFileFolder.feature:193](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavEtagPropagation1/deleteFileFolder.feature#L193)
 -   [apiWebdavEtagPropagation1/deleteFileFolder.feature:207](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavEtagPropagation1/deleteFileFolder.feature#L207)
 
-#### [Uploading an old method chunked file with checksum should fail using new DAV path](https://github.com/owncloud/ocis/issues/2323)
--   [apiMain/checksums.feature:263](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiMain/checksums.feature#L263)
 
 #### [Webdav LOCK operations](https://github.com/owncloud/ocis/issues/1284)
 -   [apiWebdavLocks/exclusiveLocks.feature:18](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavLocks/exclusiveLocks.feature#L18)
@@ -1702,21 +1700,6 @@ Scenario Outline: Do a PROPFIND to a non-existing URL
 -   [apiWebdavProperties1/copyFile.feature:464](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavProperties1/copyFile.feature#L464)
 -   [apiWebdavProperties1/copyFile.feature:465](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavProperties1/copyFile.feature#L465)
 
-### Won't fix
-Not everything needs to be implemented for ocis. While the oc10 testsuite covers these things we are not looking at them right now.
-
-* _The `OC-LazyOps` header is [no longer supported by the client](https://github.com/owncloud/client/pull/8398), implmenting this is not necessary for a first production release. We plan to have an uploed state machine to visualize the state of a file, see https://github.com/owncloud/ocis/issues/214_
-* _Blacklisted ignored files are no longer required because ocis can handle `.htaccess` files without security implications introduced by serving user provided files with apache._
-
-#### [uploading with old-chunking does not work](https://github.com/owncloud/ocis/issues/1343)
-#### [remote.php/dav/uploads endpoint does not exist](https://github.com/owncloud/ocis/issues/1321)
--   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:20](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L20)
--   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:21](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L21)
--   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:34](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L34)
--   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:35](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L35)
--   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:71](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L71)
--   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:72](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L72)
-
 #### [Blacklist files extensions](https://github.com/owncloud/ocis/issues/2177)
 -   [apiWebdavProperties1/copyFile.feature:107](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavProperties1/copyFile.feature#L107)
 -   [apiWebdavProperties1/copyFile.feature:108](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavProperties1/copyFile.feature#L108)
@@ -1724,15 +1707,6 @@ Not everything needs to be implemented for ocis. While the oc10 testsuite covers
 -   [apiWebdavProperties1/createFolder.feature:72](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavProperties1/createFolder.feature#L72)
 -   [apiWebdavUpload1/uploadFile.feature:127](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFile.feature#L127)
 -   [apiWebdavUpload1/uploadFile.feature:128](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFile.feature#L128)
--   [apiWebdavUpload2/uploadFileToBlacklistedNameUsingOldChunking.feature:19](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload2/uploadFileToBlacklistedNameUsingOldChunking.feature#L19)
--   [apiWebdavUpload2/uploadFileToBlacklistedNameUsingOldChunking.feature:35](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload2/uploadFileToBlacklistedNameUsingOldChunking.feature#L35)
--   [apiWebdavUpload2/uploadFileToBlacklistedNameUsingOldChunking.feature:36](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload2/uploadFileToBlacklistedNameUsingOldChunking.feature#L36)
--   [apiWebdavUpload2/uploadFileToBlacklistedNameUsingOldChunking.feature:37](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload2/uploadFileToBlacklistedNameUsingOldChunking.feature#L37)
--   [apiWebdavUpload2/uploadFileToExcludedDirectoryUsingOldChunking.feature:13](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload2/uploadFileToExcludedDirectoryUsingOldChunking.feature#L13)
--   [apiWebdavUpload2/uploadFileToExcludedDirectoryUsingOldChunking.feature:20](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload2/uploadFileToExcludedDirectoryUsingOldChunking.feature#L20)
--   [apiWebdavUpload2/uploadFileToExcludedDirectoryUsingOldChunking.feature:38](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload2/uploadFileToExcludedDirectoryUsingOldChunking.feature#L38)
--   [apiWebdavUpload2/uploadFileToExcludedDirectoryUsingOldChunking.feature:39](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload2/uploadFileToExcludedDirectoryUsingOldChunking.feature#L39)
--   [apiWebdavUpload2/uploadFileToExcludedDirectoryUsingOldChunking.feature:40](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload2/uploadFileToExcludedDirectoryUsingOldChunking.feature#L40)
 
 #### [cannot set blacklisted file names](https://github.com/owncloud/product/issues/260)
 -   [apiWebdavMove1/moveFolderToBlacklistedName.feature:21](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavMove1/moveFolderToBlacklistedName.feature#L21)
@@ -1767,6 +1741,12 @@ Not everything needs to be implemented for ocis. While the oc10 testsuite covers
 -   [apiWebdavUpload1/uploadFileToBlacklistedName.feature:32](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToBlacklistedName.feature#L32)
 -   [apiWebdavUpload1/uploadFileToBlacklistedName.feature:66](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToBlacklistedName.feature#L66)
 -   [apiWebdavUpload1/uploadFileToBlacklistedName.feature:67](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToBlacklistedName.feature#L67)
+-   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:20](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L20)
+-   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:21](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L21)
+-   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:34](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L34)
+-   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:35](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L35)
+-   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:71](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L71)
+-   [apiWebdavUpload1/uploadFileToExcludedDirectory.feature:72](https://github.com/owncloud/core/blob/master/tests/acceptance/features/apiWebdavUpload1/uploadFileToExcludedDirectory.feature#L72)
 
 ### [not possible to overwrite a received shared file](https://github.com/owncloud/ocis/issues/2267)
 -   [apiShareOperationsToShares1/changingFilesShare.feature:114](https://github.com/owncloud/web/blob/master/tests/acceptance/features/apiShareOperationsToShares1/changingFilesShare.feature#L114)
