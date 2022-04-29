@@ -1631,6 +1631,8 @@ def notify(ctx):
 
 def ocisServerWithAccounts(storage, accounts_hash_difficulty = 4, volumes = [], depends_on = []):
     environment = {
+        "STORAGE_METADATA_LOG_LEVEL": "debug",
+        "SETTINGS_LOG_LEVEL": "debug",
         "GRAPH_IDENTITY_BACKEND": "cs3",
         "GRAPH_LDAP_SERVER_WRITE_ENABLED": "false",
         "LDAP_URI": "ldaps://0.0.0.0:9126",
