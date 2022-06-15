@@ -263,3 +263,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	stash.kopano.io/kgol/kcc-go/v5 v5.0.1 // indirect
 )
+
+replace github.com/cs3org/reva/v2 => ../reva
+
+replace github.com/cs3org/go-cs3apis => github.com/kobergj/go-cs3apis v0.0.0-20220610101249-8067918fe8bf
