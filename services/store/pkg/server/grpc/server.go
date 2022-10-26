@@ -12,10 +12,10 @@ func Server(opts ...Option) grpc.Service {
 	options := newOptions(opts...)
 
 	service, err := grpc.NewService(
-		grpc.TLSEnabled(options.Config.MicroGRPCService.TLSEnabled),
+		grpc.TLSEnabled(options.Config.GRPCServiceTLS.Enabled),
 		grpc.TLSCert(
-			options.Config.MicroGRPCService.TLSCert,
-			options.Config.MicroGRPCService.TLSKey,
+			options.Config.GRPCServiceTLS.Cert,
+			options.Config.GRPCServiceTLS.Key,
 		),
 		grpc.Namespace(options.Config.GRPC.Namespace),
 		grpc.Name(options.Config.Service.Name),

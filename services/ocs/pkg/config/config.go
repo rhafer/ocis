@@ -21,7 +21,7 @@ type Config struct {
 
 	TokenManager    *TokenManager           `yaml:"token_manager"`
 	Reva            *shared.Reva            `yaml:"reva"`
-	MicroGRPCClient *shared.MicroGRPCClient `yaml:"micro_grpc_client"`
+	GRPCClientTLS *shared.GRPCClientTLS `yaml:"grpc_client_tls"`
 
 	IdentityManagement IdentityManagement `yaml:"identity_management"`
 

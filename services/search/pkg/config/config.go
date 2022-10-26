@@ -20,8 +20,8 @@ type Config struct {
 
 	Datapath         string                   `yaml:"data_path" env:"SEARCH_DATA_PATH" desc:"The directory where the filesystem storage will store search data. If not definied, the root directory derives from $OCIS_BASE_DATA_PATH:/search."`
 	Reva             *shared.Reva             `yaml:"reva"`
-	MicroGRPCClient  *shared.MicroGRPCClient  `yaml:"micro_grpc_client"`
-	MicroGRPCService *shared.MicroGRPCService `yaml:"micro_grpc_service"`
+	GRPCClientTLS  *shared.GRPCClientTLS  `yaml:"grpc_client_tls"`
+	GRPCServiceTLS *shared.GRPCServiceTLS `yaml:"grpc_service_tls"`
 	Events           Events                   `yaml:"events"`
 
 	MachineAuthAPIKey string `yaml:"machine_auth_api_key" env:"OCIS_MACHINE_AUTH_API_KEY;SEARCH_MACHINE_AUTH_API_KEY" desc:"Machine auth API key used to validate internal requests necessary for the access to resources from other services."`
