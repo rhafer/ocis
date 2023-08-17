@@ -9,6 +9,7 @@ import (
 	authbasic "github.com/owncloud/ocis/v2/services/auth-basic/pkg/config"
 	authbearer "github.com/owncloud/ocis/v2/services/auth-bearer/pkg/config"
 	authmachine "github.com/owncloud/ocis/v2/services/auth-machine/pkg/config"
+	authelia "github.com/owncloud/ocis/v2/services/authelia/pkg/config"
 	eventhistory "github.com/owncloud/ocis/v2/services/eventhistory/pkg/config"
 	frontend "github.com/owncloud/ocis/v2/services/frontend/pkg/config"
 	gateway "github.com/owncloud/ocis/v2/services/gateway/pkg/config"
@@ -81,6 +82,7 @@ type Config struct {
 	Audit             *audit.Config          `yaml:"audit"`
 	AuthBasic         *authbasic.Config      `yaml:"auth_basic"`
 	AuthBearer        *authbearer.Config     `yaml:"auth_bearer"`
+	Authelia          *authelia.Config       `yaml:"authelia"`
 	AuthMachine       *authmachine.Config    `yaml:"auth_machine"`
 	EventHistory      *eventhistory.Config   `yaml:"eventhistory"`
 	Frontend          *frontend.Config       `yaml:"frontend"`
