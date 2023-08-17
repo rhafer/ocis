@@ -3,6 +3,7 @@ package router
 import (
 	"context"
 	"net/http"
+	"net/http/httputil"
 	"net/url"
 	"regexp"
 	"strings"
@@ -85,13 +86,13 @@ func New(policySelector *config.PolicySelector, policies []config.Policy, logger
 
 // RoutingInfo contains the proxy director and some information about the route.
 type RoutingInfo struct {
-	director    func(*http.Request)
+	director    func(*httputil.ProxyRequest)
 	endpoint    string
 	unprotected bool
 }
 
 // Director returns the proxy director.
-func (r RoutingInfo) Director() func(*http.Request) {
+func (r RoutingInfo) Director() func(*httputil.ProxyRequest) {
 	return r.director
 }
 
@@ -129,7 +130,7 @@ func (rt Router) addHost(policy string, target *url.URL, route config.Route) {
 	rt.directors[policy][routeType][route.Method] = append(rt.directors[policy][routeType][route.Method], RoutingInfo{
 		endpoint:    route.Endpoint,
 		unprotected: route.Unprotected,
-		director: func(req *http.Request) {
+		director: func(req *httputil.ProxyRequest) {
 			if route.Service != "" {
 				// select next node
 				next, err := sel.Select(route.Service)
@@ -146,32 +147,33 @@ func (rt Router) addHost(policy string, target *url.URL, route config.Route) {
 						Msg("could not select next node")
 					return // TODO error? fallback to target.Host & Scheme?
 				}
-				req.URL.Host = node.Address
-				req.URL.Scheme = node.Metadata["protocol"] // TODO check property exists?
+				req.Out.URL.Host = node.Address
+				req.Out.URL.Scheme = node.Metadata["protocol"] // TODO check property exists?
 				if node.Metadata["use_tls"] == "true" {
-					req.URL.Scheme = "https"
+					req.Out.URL.Scheme = "https"
 				}
 			} else {
-				req.URL.Host = target.Host
-				req.URL.Scheme = target.Scheme
+				req.Out.URL.Host = target.Host
+				req.Out.URL.Scheme = target.Scheme
 			}
 
-			// Apache deployments host addresses need to match on req.Host and req.URL.Host
+			// Apache deployments host addresses need to match on req.Out.Host and req.Out.URL.Host
 			// see https://stackoverflow.com/questions/34745654/golang-reverseproxy-with-apache2-sni-hostname-error
 			if route.ApacheVHost {
-				req.Host = target.Host
+				req.Out.Host = target.Host
 			}
 
-			req.URL.Path = singleJoiningSlash(target.Path, req.URL.Path)
-			if targetQuery == "" || req.URL.RawQuery == "" {
-				req.URL.RawQuery = targetQuery + req.URL.RawQuery
+			req.Out.URL.Path = singleJoiningSlash(target.Path, req.Out.URL.Path)
+			if targetQuery == "" || req.Out.URL.RawQuery == "" {
+				req.Out.URL.RawQuery = targetQuery + req.Out.URL.RawQuery
 			} else {
-				req.URL.RawQuery = targetQuery + "&" + req.URL.RawQuery
+				req.Out.URL.RawQuery = targetQuery + "&" + req.Out.URL.RawQuery
 			}
-			if _, ok := req.Header["User-Agent"]; !ok {
+			if _, ok := req.Out.Header["User-Agent"]; !ok {
 				// explicitly disable User-Agent so it's not set to default value
-				req.Header.Set("User-Agent", "")
+				req.Out.Header.Set("User-Agent", "")
 			}
+			req.SetXForwarded()
 		},
 	})
 }
