@@ -100,7 +100,12 @@ func DefaultPolicies() []config.Policy {
 				},
 				{
 					Endpoint:    "/.well-known/openid-configuration",
-					Service:     "com.owncloud.web.idp",
+					Backend:     "http://localhost:9091/authelia",
+					Unprotected: true,
+				},
+				{
+					Endpoint:    "/authelia",
+					Backend:     "http://localhost:9091",
 					Unprotected: true,
 				},
 				{
