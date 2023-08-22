@@ -24,6 +24,11 @@ func DefaultConfig() *config.Config {
 		Service: config.Service{
 			Name: "authelia",
 		},
+		Ldap: config.Ldap{
+			URI:    "ldaps://localhost:9235",
+			BindDN: "uid=idp,ou=sysusers,o=libregraph-idm",
+			BaseDN: "o=libregraph-idm",
+		},
 	}
 }
 

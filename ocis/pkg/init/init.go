@@ -157,6 +157,7 @@ type OcisConfig struct {
 	AdminUserID       string       `yaml:"admin_user_id"`
 	Graph             GraphService
 	Idp               LdapBasedService
+	Authelia          LdapBasedService
 	Idm               IdmService
 	Proxy             InsecureProxyService
 	Frontend          FrontendService
@@ -285,6 +286,11 @@ func CreateConfig(insecure, forceOverwrite bool, configPath, adminPassword strin
 			},
 		},
 		Idp: LdapBasedService{
+			Ldap: LdapSettings{
+				BindPassword: idpServicePassword,
+			},
+		},
+		Authelia: LdapBasedService{
 			Ldap: LdapSettings{
 				BindPassword: idpServicePassword,
 			},
