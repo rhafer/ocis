@@ -24,13 +24,13 @@ import (
 	audit "github.com/owncloud/ocis/v2/services/audit/pkg/command"
 	authbasic "github.com/owncloud/ocis/v2/services/auth-basic/pkg/command"
 	authmachine "github.com/owncloud/ocis/v2/services/auth-machine/pkg/command"
+	authelia "github.com/owncloud/ocis/v2/services/authelia/pkg/command"
 	eventhistory "github.com/owncloud/ocis/v2/services/eventhistory/pkg/command"
 	frontend "github.com/owncloud/ocis/v2/services/frontend/pkg/command"
 	gateway "github.com/owncloud/ocis/v2/services/gateway/pkg/command"
 	graph "github.com/owncloud/ocis/v2/services/graph/pkg/command"
 	groups "github.com/owncloud/ocis/v2/services/groups/pkg/command"
 	idm "github.com/owncloud/ocis/v2/services/idm/pkg/command"
-	idp "github.com/owncloud/ocis/v2/services/idp/pkg/command"
 	invitations "github.com/owncloud/ocis/v2/services/invitations/pkg/command"
 	nats "github.com/owncloud/ocis/v2/services/nats/pkg/command"
 	notifications "github.com/owncloud/ocis/v2/services/notifications/pkg/command"
@@ -283,10 +283,10 @@ func NewService(options ...Option) (*Service, error) {
 	dreg := func(name string, exec func(context.Context, *ociscfg.Config) error) {
 		s.Delayed[name] = NewSutureServiceBuilder(exec)
 	}
-	dreg(opts.Config.IDP.Service.Name, func(ctx context.Context, cfg *ociscfg.Config) error {
-		cfg.IDP.Context = ctx
-		cfg.IDP.Commons = cfg.Commons
-		return idp.Execute(cfg.IDP)
+	dreg(opts.Config.Authelia.Service.Name, func(ctx context.Context, cfg *ociscfg.Config) error {
+		cfg.Authelia.Context = ctx
+		cfg.Authelia.Commons = cfg.Commons
+		return authelia.Execute(cfg.Authelia)
 	})
 	dreg(opts.Config.Proxy.Service.Name, func(ctx context.Context, cfg *ociscfg.Config) error {
 		cfg.Proxy.Context = ctx
