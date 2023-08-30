@@ -23,6 +23,8 @@ RUN make ci-node-generate
 
 FROM owncloudci/golang:1.20 as build
 
+RUN apk add libheif-dev
+
 COPY --from=generate /ocis /ocis
 
 WORKDIR /ocis/ocis
@@ -30,7 +32,7 @@ RUN make ci-go-generate build
 
 FROM alpine:3.18
 
-RUN apk add --no-cache ca-certificates mailcap tree attr curl && \
+RUN apk add --no-cache ca-certificates mailcap tree attr curl libheif && \
 	echo 'hosts: files dns' >| /etc/nsswitch.conf
 
 LABEL maintainer="ownCloud GmbH <devops@owncloud.com>" \
