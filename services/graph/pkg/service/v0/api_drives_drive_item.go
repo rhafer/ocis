@@ -14,6 +14,7 @@ import (
 	"google.golang.org/protobuf/types/known/fieldmaskpb"
 
 	"github.com/cs3org/reva/v2/pkg/rgrpc/todo/pool"
+	"github.com/cs3org/reva/v2/pkg/share/manager/jsoncs3/shareid"
 	"github.com/cs3org/reva/v2/pkg/storagespace"
 
 	"github.com/owncloud/ocis/v2/ocis-pkg/log"
@@ -56,6 +57,14 @@ func (s DrivesDriveItemService) UnmountShare(ctx context.Context, resourceID sto
 		return err
 	}
 
+	// HACK: This is a hack we should not rely on a specific format of the item id, but current the real
+	// resource id of the shared resource is buried in the opaque id of the share's resourceid
+	// Also this relies on specific behaviour of the jsoncs3 share manager
+	storageId, spaceId, opaqueId := shareid.Decode(resourceID.GetOpaqueId())
+	resourceID.StorageId = storageId
+	resourceID.SpaceId = spaceId
+	resourceID.OpaqueId = opaqueId
+
 	receivedSharesResponse, err := gatewayClient.ListReceivedShares(ctx, &collaboration.ListReceivedSharesRequest{
 		Filters: []*collaboration.Filter{
 			{
@@ -86,17 +95,20 @@ func (s DrivesDriveItemService) UnmountShare(ctx context.Context, resourceID sto
 			UpdateMask: &fieldmaskpb.FieldMask{Paths: []string{_fieldMaskPathState}},
 		}
 
-		updateReceivedShareResponse, err := gatewayClient.UpdateReceivedShare(ctx, updateReceivedShareRequest)
+		_, err := gatewayClient.UpdateReceivedShare(ctx, updateReceivedShareRequest)
 		if err != nil {
 			errs = append(errs, err)
 			continue
 		}
-
-		// fixMe: send to nirvana, wait for toDriverItem func
-		_ = updateReceivedShareResponse
 	}
 
-	return errors.Join(errs...)
+	// We call it a success if all shares could successfully be rejected, otherwise
+	// we return an error
+	if len(errs) != 0 {
+		return errors.Join(errs...)
+	}
+
+	return nil
 }
 
 // MountShare mounts a share
