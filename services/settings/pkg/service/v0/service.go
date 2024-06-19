@@ -17,7 +17,7 @@ import (
 	"github.com/owncloud/ocis/v2/services/settings/pkg/config"
 	"github.com/owncloud/ocis/v2/services/settings/pkg/settings"
 	"github.com/owncloud/ocis/v2/services/settings/pkg/store/defaults"
-	metastore "github.com/owncloud/ocis/v2/services/settings/pkg/store/metadata"
+	"github.com/owncloud/ocis/v2/services/settings/pkg/store/rqlite"
 	merrors "go-micro.dev/v4/errors"
 	"go-micro.dev/v4/metadata"
 	"google.golang.org/protobuf/types/known/emptypb"
@@ -39,7 +39,7 @@ func NewService(cfg *config.Config, logger log.Logger) settings.ServiceHandler {
 		logger: logger,
 	}
 
-	service.manager = metastore.New(cfg)
+	service.manager = rqlite.New(cfg)
 	return service
 }
 
